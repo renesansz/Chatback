@@ -1,0 +1,22 @@
+.container {
+    margin: 0 auto;
+    width: 80%;
+}
+
+#content {
+    background: #6E6E6E;
+    border-radius: 10px;
+    color: #FFF;
+    margin-bottom: 10px;
+    padding: 10px;
+    height: 250px;
+}
+
+#content > p {
+    margin: 0 auto;
+}
+
+#content,
+#message {
+    width: 100%;
+}
