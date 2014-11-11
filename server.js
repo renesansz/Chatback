@@ -2,8 +2,8 @@
 
 process.title = 'Chatback Server';
 
-var WebSocket = require('websocket').server;
-var http = require('http');
+var WebSocket = require('websocket').server,
+    http = require('http');
 
 /**
  * Global Variables
@@ -11,13 +11,13 @@ var http = require('http');
 var serverPort = 1337,
     chatHistory = [],
     clientList = [],
-    colors = ['red', 'green', 'blue', 'magenta', 'purple', 'plum', 'orange'];
+    colors = ['red', 'green', 'blue', 'magenta', 'purple', 'plum', 'orange', 'yellow', 'cyan'];
 
 // Sort colors randomnly.
 colors.sort(function() { return Math.random() > 0.5; } );
 
 /**
- * Function: HtmlEntities
+ * Function: HTMLEntities
  *
  * Escape html string.
  *
@@ -25,7 +25,7 @@ colors.sort(function() { return Math.random() > 0.5; } );
  * 
  *     String - The espaced string.
  */
-function HtmlEntities(str) {
+function HTMLEntities(str) {
     return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;')
                       .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
@@ -46,11 +46,17 @@ var webSocketSrv = new WebSocket({
 });
 
 /**
+ * Function: WebSocketOnRequest
+ * 
  * WebSocketSrv connection callback.
+ *
+ * Parameter:
+ * 
+ *     req - The request sent by client.
  */
 function WebSocketOnRequest(req) {
     // console.log(req.origin);
-    console.log((new Date()) + ' Connection from origin ' + req.origin + '.');
+    console.log('[' + (new Date()) + '] Connection from origin: ' + req.origin);
 
     var conn = req.accept(null, req.origin),
         index = clientList.push(conn) - 1,
@@ -70,7 +76,7 @@ function WebSocketOnRequest(req) {
             var mesStr = mes.utf8Data;
             // If no username yet, set the first message as the username.
             if (userName === null) {
-                userName = HtmlEntities(mesStr); // Get username
+                userName = HTMLEntities(mesStr); // Get username
                 userColor = colors.shift(); // Assign random color
 
                 conn.sendUTF(JSON.stringify({ type: 'color', data: userColor }));
@@ -90,7 +96,7 @@ function WebSocketOnRequest(req) {
                 };
                 // console.log(mesData);
                 chatHistory.push(mesData);
-                chatHistory = chatHistory.slice(-100);
+                chatHistory = chatHistory.slice(-100); // We need only the last 100 messages to be stored.
 
                 // Broadcast received message to all clientList.
                 var mesJson = JSON.stringify({

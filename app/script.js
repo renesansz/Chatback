@@ -1,10 +1,10 @@
 (function() {
     'use strict';
 
-    // DOM Reference
-    var contentDOM = document.querySelector('#content');
-    var statusDOM = document.querySelector('#status');
-    var inputDOM = document.querySelector('#message');
+    // DOM References
+    var contentDOM = document.querySelector('#content'),
+        statusDOM = document.querySelector('#status'),
+        inputDOM = document.querySelector('#message');
 
     // Global Variables
     var myColor = null,
@@ -123,6 +123,7 @@
 
     /**
      * Function: AppendMessage
+     * 
      * Add message to the chat window
      */
     function AppendMessage(author, message, color, dt) {
