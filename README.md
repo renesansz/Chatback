@@ -16,4 +16,6 @@ A simple chat website with a chat server created using **NodeJS**.
 
 * Simply open `app/index.html` and you're good to go.
 
-LICENSE: MIT
+
+ LICENSE: MIT
+--------------
