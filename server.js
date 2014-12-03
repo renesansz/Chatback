@@ -23,7 +23,7 @@ colors.sort(function() { return Math.random() > 0.5; } );
  *
  * Return:
  * 
- *     String - The espaced string.
+ *     String - The escaped string.
  */
 function HTMLEntities(str) {
     return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;')
@@ -55,7 +55,6 @@ var webSocketSrv = new WebSocket({
  *     req - The request sent by client.
  */
 function WebSocketOnRequest(req) {
-    // console.log(req.origin);
     console.log('[' + (new Date()) + '] Connection from origin: ' + req.origin);
 
     var conn = req.accept(null, req.origin),
@@ -70,9 +69,7 @@ function WebSocketOnRequest(req) {
 
     // Handle all messages from users
     conn.on('message', function(mes) {
-        // console.log(mes);
         if (mes.type === 'utf8') {
-            // console.log('2313123');
             var mesStr = mes.utf8Data;
             // If no username yet, set the first message as the username.
             if (userName === null) {
@@ -85,8 +82,6 @@ function WebSocketOnRequest(req) {
             }
             // Else, log and broadcast the message
             else {
-                // console.log(userName + ': ' + mesStr);
-
                 // Keep history of all sent messages
                 var mesData = {
                     time: (new Date()).getTime(),
@@ -94,7 +89,7 @@ function WebSocketOnRequest(req) {
                     color: userColor,
                     author: userName
                 };
-                // console.log(mesData);
+
                 chatHistory.push(mesData);
                 chatHistory = chatHistory.slice(-100); // We need only the last 100 messages to be stored.
 
@@ -103,8 +98,6 @@ function WebSocketOnRequest(req) {
                     type: 'message',
                     data: mesData
                 });
-
-                // console.log(clientList);
 
                 for (var r = 0, limit = clientList.length; r < limit; ++r) {
                     clientList[r].sendUTF(mesJson);
