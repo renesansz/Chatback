@@ -2,16 +2,16 @@
 
 process.title = 'Chatback Server';
 
-var WebSocket = require('websocket').server,
-    http = require('http');
+var WebSocket = require('websocket').server;
+var http = require('http');
 
 /**
  * Global Variables
  */
-var serverPort = 1337,
-    chatHistory = [],
-    clientList = [],
-    colors = ['red', 'green', 'blue', 'magenta', 'purple', 'plum', 'orange', 'yellow', 'cyan'];
+var serverPort = 1337;
+var chatHistory = [];
+var clientList = [];
+var colors = ['red', 'green', 'blue', 'magenta', 'purple', 'plum', 'orange', 'yellow', 'cyan'];
 
 // Sort colors randomnly.
 colors.sort(function() { return Math.random() > 0.5; } );
@@ -57,10 +57,10 @@ var webSocketSrv = new WebSocket({
 function WebSocketOnRequest(req) {
     console.log('[' + (new Date()) + '] Connection from origin: ' + req.origin);
 
-    var conn = req.accept(null, req.origin),
-        index = clientList.push(conn) - 1,
-        userName = null,
-        userColor = null;
+    var conn = req.accept(null, req.origin);
+    var index = clientList.push(conn) - 1;
+    var userName = null;
+    var userColor = null;
 
     // Retrieve chat history
     if (chatHistory.length > 0) {
@@ -108,11 +108,11 @@ function WebSocketOnRequest(req) {
 
     // Close connection
     conn.on('close', function(client) {
-        console.log(client);
         if (userName !== null && userColor !== null) {
             console.log('Client ' + client.remoteAddress + ' has disconnected.');
 
             clientList.splice(index, 1); // Remove client from list
+            
             colors.push(userColor); // Marked the user's color to be available
         }
     });

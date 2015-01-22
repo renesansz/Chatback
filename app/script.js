@@ -2,13 +2,13 @@
     'use strict';
 
     // DOM References
-    var contentDOM = document.querySelector('#content'),
-        statusDOM = document.querySelector('#status'),
-        inputDOM = document.querySelector('#message');
+    var contentDOM = document.querySelector('#content');
+    var statusDOM = document.querySelector('#status');
+    var inputDOM = document.querySelector('#message');
 
     // Global Variables
-    var myColor = null,
-        myAlias = null;
+    var myColor = null;
+    var myAlias = null;
 
     // if user is running mozilla then use it's built-in WebSocket
     window.WebSocket = window.WebSocket || window.MozWebSocket;
@@ -54,43 +54,44 @@
          */
         conn.onmessage = function(mes) {
             var json = null;
+            
             try {
                 json = JSON.parse(mes.data);
             } catch(err) {
                 console.log('Invalid JSON Format: ' + mes.data);
                 return;
             }
-            // console.log(json);
+
             switch(json.type) {
-                case 'color':
-                    myColor = mes.data;
+            case 'color':
+                myColor = mes.data;
 
-                    inputDOM.removeAttribute('disabled');
-                    inputDOM.removeAttribute('placeholder');
-                break;
-                case 'history': // Display previous messages
-                    for (var r = 0, limit = json.data.length; r < limit; ++r) {
-                        AppendMessage(
-                            json.data[r].author,
-                            json.data[r].text,
-                            json.data[r].color,
-                            new Date(json.data[r].time)
-                        );
-                    }
-                break;
-                case 'message': // Display new message
-                    inputDOM.removeAttribute('disabled');
-
+                inputDOM.removeAttribute('disabled');
+                inputDOM.removeAttribute('placeholder');
+            break;
+            case 'history': // Display previous messages
+                for (var r = 0, limit = json.data.length; r < limit; ++r) {
                     AppendMessage(
-                        json.data.author,
-                        json.data.text,
-                        json.data.color,
-                        new Date(json.data.time)
+                        json.data[r].author,
+                        json.data[r].text,
+                        json.data[r].color,
+                        new Date(json.data[r].time)
                     );
-                break;
-                default:
-                    console.log('Unrecognized JSON type');
-                break;
+                }
+            break;
+            case 'message': // Display new message
+                inputDOM.removeAttribute('disabled');
+
+                AppendMessage(
+                    json.data.author,
+                    json.data.text,
+                    json.data.color,
+                    new Date(json.data.time)
+                );
+            break;
+            default:
+                console.log('Unrecognized JSON type');
+            break;
             }
         };
 
