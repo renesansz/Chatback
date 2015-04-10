@@ -2,7 +2,7 @@
 
 process.title = 'Chatback Server';
 
-var WebSocket = require('websocket').server;
+var webSocket = require('websocket').server;
 var http = require('http');
 
 /**
@@ -39,22 +39,22 @@ server.listen(serverPort, function() {
 });
 
 /**
- * Initialize WebSocket server
+ * Initialize webSocket server
  */
-var webSocketSrv = new WebSocket({
+var webSocketSrv = new webSocket({
     httpServer: server
 });
 
 /**
- * Function: WebSocketOnRequest
+ * Function: webSocketOnRequest
  * 
- * WebSocketSrv connection callback.
+ * webSocketSrv connection callback.
  *
  * Parameter:
  * 
  *     req - The request sent by client.
  */
-function WebSocketOnRequest(req) {
+function webSocketOnRequest(req) {
     console.log('[' + (new Date()) + '] Connection from origin: ' + req.origin);
 
     var conn = req.accept(null, req.origin);
@@ -117,4 +117,4 @@ function WebSocketOnRequest(req) {
         }
     });
 }
-webSocketSrv.on('request', WebSocketOnRequest);
+webSocketSrv.on('request', webSocketOnRequest);
