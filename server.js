@@ -1,13 +1,16 @@
 'use strict';
 
+// Command Prompt Title
+// --------------------
 process.title = 'Chatback Server';
 
+// Some Dependencies
+// -----------------
 var webSocket = require('websocket').server;
 var http = require('http');
 
-/**
- * Global Variables
- */
+// Global Variables
+// -----------------
 var serverPort = 1337;
 var chatHistory = [];
 var clientList = [];
@@ -17,13 +20,9 @@ var colors = ['red', 'green', 'blue', 'magenta', 'purple', 'plum', 'orange', 'ye
 colors.sort(function() { return Math.random() > 0.5; } );
 
 /**
- * Function: HTMLEntities
- *
  * Escape html string.
  *
- * Return:
- * 
- *     String - The escaped string.
+ * @returns {String}
  */
 function HTMLEntities(str) {
     return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;')
@@ -34,9 +33,9 @@ function HTMLEntities(str) {
  * Initialize HTTP Server
  */
 var server = http.createServer();
-server.listen(serverPort, function() {
-    console.log('Listening to port: ' + serverPort);
-});
+    server.listen(serverPort, function() {
+        console.log('Listening to port: ' + serverPort);
+    });
 
 /**
  * Initialize webSocket server
@@ -46,15 +45,12 @@ var webSocketSrv = new webSocket({
 });
 
 /**
- * Function: webSocketOnRequest
- * 
  * webSocketSrv connection callback.
  *
- * Parameter:
- * 
- *     req - The request sent by client.
+ * @param {Object} req - The request sent by client
  */
 function webSocketOnRequest(req) {
+
     console.log('[' + (new Date()) + '] Connection from origin: ' + req.origin);
 
     var conn = req.accept(null, req.origin);
@@ -63,15 +59,20 @@ function webSocketOnRequest(req) {
     var userColor = null;
 
     // Retrieve chat history
+    // ----------------------
     if (chatHistory.length > 0) {
         conn.sendUTF(JSON.stringify( { type: 'history', data: chatHistory } ));
     }
 
     // Handle all messages from users
+    // -------------------------------
     conn.on('message', function(mes) {
         if (mes.type === 'utf8') {
+
             var mesStr = mes.utf8Data;
+
             // If no username yet, set the first message as the username.
+            // else, log and broadcast the message
             if (userName === null) {
                 userName = HTMLEntities(mesStr); // Get username
                 userColor = colors.shift(); // Assign random color
@@ -79,9 +80,9 @@ function webSocketOnRequest(req) {
                 conn.sendUTF(JSON.stringify({ type: 'color', data: userColor }));
 
                 console.log('New user connected: ' + userName);
-            }
-            // Else, log and broadcast the message
-            else {
+
+            } else {
+
                 // Keep history of all sent messages
                 var mesData = {
                     time: (new Date()).getTime(),
@@ -109,7 +110,8 @@ function webSocketOnRequest(req) {
     // Close connection
     conn.on('close', function(client) {
         if (userName !== null && userColor !== null) {
-            console.log('Client ' + client.remoteAddress + ' has disconnected.');
+
+            console.log('Client ' + client + ' has disconnected.');
 
             clientList.splice(index, 1); // Remove client from list
             
