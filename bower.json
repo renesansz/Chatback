@@ -1,0 +1,20 @@
+{
+  "name": "chatback",
+  "version": "1.0.0",
+  "authors": [
+    "Renemari Padillo <padillo.renemari@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "normalize.css": "~3.0.3",
+    "gsap": "~1.16.1",
+    "modernizr": "~2.8.3"
+  }
+}
