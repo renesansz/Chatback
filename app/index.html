@@ -2,25 +2,50 @@
 <html class="no-js" lang="en">
 <head>
   <meta charset="UTF-8">
+
   <title>Chatback</title>
 
-  <!-- Page Style(s) -->
-  <link rel="stylesheet" type="text/css" href="vendors/normalize.css/normalize.css">
-  <link rel="stylesheet" href="style.css">
+  <!-- Device Viewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+  <!-- Vendor Style(s) -->
+  <link rel="stylesheet" type="text/css" href="vendors/normalize.css/normalize.css" />
+  <link rel="stylesheet" type="text/css" href="vendors/bootswatch-dist/css/bootstrap.min.css" />
+
+  <!-- Page Style -->
+  <link rel="stylesheet" href="style.css" />
 
   <!-- Priority Script(s) -->
   <script type="text/javascript" src="vendors/modernizr/modernizr.js"></script>
+
 </head>
 <body>
   <div class="container">
-    <p>Chat server: <span id="status">Connecting...</span></p>
 
-    <div id="content"></div>
+    <div class="row">
+      <div class="col-xs-2">    
+        <p>Chat server: <span id="status">Connecting...</span></p>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div id="content" class="col-xs-12">
+      </div>
+    </div>
 
-    <input type="text" id="message" disabled>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="input-group col-xs-12">
+          <input class="form-control" type="text" id="message" disabled />
+          <span class="input-group-btn">
+            <button class="btn btn-primary"><i class="glyphicon glyphicon-send"></i> Send</button>
+          </span>
+        </div>
+      </div>
+    </div>
 
     <!-- Page Script(s) -->
-    <script src="script.js"></script>
+    <script type="text/javascript" src="script.js"></script>
 
   </div>
 </body>

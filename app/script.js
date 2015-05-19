@@ -1,4 +1,5 @@
 (function() {
+
     'use strict';
 
     // DOM References
@@ -55,6 +56,7 @@
          * @param {String} mes
          */
         conn.onmessage = function(mes) {
+            
             var json = null;
             
             try {
@@ -106,23 +108,28 @@
      * @param {Object} e - Key Input Object
      */
     function OnKeyDown(e) {
-        if (e.keyCode === 13) {
-            // console.log(inputDOM.value);
-            var msg = inputDOM.value;
+        // On enter, send the message
+        if (e.keyCode === 13)
+            SendMessage()
+    }
 
-            if ( ! msg.length) {
-                return;
-            }
+    /**
+     * Sends the message via websocket.
+     */
+    function SendMessage() {
 
-            conn.send(msg);
+        var msg = inputDOM.value;
 
-            inputDOM.value = '';
-            inputDOM.setAttribute('disabled', 'disabled');
+        if ( ! msg.length)
+            return;            
 
-            if (myAlias === null) {
-                myAlias = msg;
-            }
-        }
+        conn.send(msg);
+
+        inputDOM.value = '';
+        inputDOM.setAttribute('disabled', 'disabled');
+
+        if (myAlias === null)
+            myAlias = msg;
     }
 
     /**
