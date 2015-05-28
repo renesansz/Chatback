@@ -60,9 +60,8 @@ function webSocketOnRequest(req) {
 
     // Retrieve chat history
     // ----------------------
-    if (chatHistory.length > 0) {
+    if (chatHistory.length > 0)
         conn.sendUTF(JSON.stringify( { type: 'history', data: chatHistory } ));
-    }
 
     // Handle all messages from users
     // -------------------------------
@@ -100,9 +99,8 @@ function webSocketOnRequest(req) {
                     data: mesData
                 });
 
-                for (var r = 0, limit = clientList.length; r < limit; ++r) {
+                for (var r = 0, limit = clientList.length; r < limit; ++r)
                     clientList[r].sendUTF(mesJson);
-                }
             }
         }
     });
