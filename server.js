@@ -25,8 +25,10 @@ colors.sort(function() { return Math.random() > 0.5; } );
  * @returns {String}
  */
 function HTMLEntities(str) {
+
     return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;')
                       .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+                      
 }
 
 /**
@@ -73,7 +75,7 @@ function webSocketOnRequest(req) {
             // If no username yet, set the first message as the username.
             // else, log and broadcast the message
             if (userName === null) {
-                userName = HTMLEntities(mesStr); // Get username
+                userName  = HTMLEntities(mesStr); // Get username
                 userColor = colors.shift(); // Assign random color
 
                 conn.sendUTF(JSON.stringify({ type: 'color', data: userColor }));
