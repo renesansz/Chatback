@@ -11,9 +11,9 @@ var http = require('http');
 
 // Global Variables
 // -----------------
-var serverPort = 1337;
+var serverPort  = 1337;
 var chatHistory = [];
-var clientList = [];
+var clientList  = [];
 var colors = ['red', 'green', 'blue', 'magenta', 'purple', 'plum', 'orange', 'yellow', 'cyan'];
 
 // Sort colors randomnly.
