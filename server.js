@@ -36,7 +36,9 @@ function HTMLEntities(str) {
  */
 var server = http.createServer();
     server.listen(serverPort, function() {
+
         console.log('Listening to port: ' + serverPort);
+
     });
 
 /**
@@ -68,6 +70,7 @@ function webSocketOnRequest(req) {
     // Handle all messages from users
     // -------------------------------
     conn.on('message', function(mes) {
+
         if (mes.type === 'utf8') {
 
             var mesStr = mes.utf8Data;
@@ -103,8 +106,10 @@ function webSocketOnRequest(req) {
 
                 for (var r = 0, limit = clientList.length; r < limit; ++r)
                     clientList[r].sendUTF(mesJson);
+                
             }
         }
+
     });
 
     // Close connection
@@ -118,5 +123,6 @@ function webSocketOnRequest(req) {
             colors.push(userColor); // Marked the user's color to be available
         }
     });
+
 }
 webSocketSrv.on('request', webSocketOnRequest);
