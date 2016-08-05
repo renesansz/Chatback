@@ -8,6 +8,7 @@ process.title = 'Chatback Server';
 // -----------------
 var webSocket = require('websocket').server;
 var http = require('http');
+
 // Global Variables
 // -----------------
 var serverPort  = 1337;
