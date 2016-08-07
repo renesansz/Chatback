@@ -33,7 +33,6 @@
         conn.onopen = function() {
             statusDOM.innerHTML = 'Connected';
             statusDOM.style.color = '#00FF00';
-
             // Tell the user to enter a name first
             inputDOM.removeAttribute('disabled');
             inputDOM.setAttribute('placeholder', 'Enter your alias name');
