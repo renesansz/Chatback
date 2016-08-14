@@ -44,7 +44,6 @@
         conn.onerror = function() {
             contentDOM.innerHTML = 'It seems there is a problem with your connection to the server.';
             contentDOM.style.color = '#FF0000';
-            
             statusDOM.innerHTML = 'Connection Error';
             statusDOM.style.color = '#FF0000';
         };
