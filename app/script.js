@@ -54,7 +54,6 @@
          * @param {String} mes
          */
         conn.onmessage = function(mes) {
-            
             var json = null;
             
             try {
@@ -115,7 +114,6 @@
      * Sends the message via websocket.
      */
     function SendMessage() {
-
         var msg = inputDOM.value;
 
         if ( ! msg.length)
