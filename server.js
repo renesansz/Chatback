@@ -109,8 +109,8 @@ function webSocketOnRequest(req) {
                 
             }
         }
-
     });
+
     // Close connection
     conn.on('close', function(client) {
         if (userName !== null && userColor !== null) {
@@ -122,5 +122,6 @@ function webSocketOnRequest(req) {
             colors.push(userColor); // Marked the user's color to be available
         }
     });
+    
 }
 webSocketSrv.on('request', webSocketOnRequest);
