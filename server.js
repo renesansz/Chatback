@@ -14,7 +14,9 @@ var http = require('http');
 var serverPort  = 1337;
 var chatHistory = [];
 var clientList  = [];
-var colors = ['red', 'green', 'blue', 'magenta', 'purple', 'plum', 'orange', 'yellow', 'cyan'];
+var colors = ['red', 'green', 'blue',
+              'magenta', 'purple', 'plum',
+              'orange', 'yellow', 'cyan'];
 
 // Sort colors randomnly.
 colors.sort(function() { return Math.random() > 0.5; } );
