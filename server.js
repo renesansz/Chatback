@@ -45,7 +45,9 @@ var server = http.createServer();
  * Initialize webSocket server
  */
 var webSocketSrv = new webSocket({
+    
     httpServer: server
+
 });
 
 /**
