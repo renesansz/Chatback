@@ -38,9 +38,7 @@ function HTMLEntities(str) {
  */
 var server = http.createServer();
     server.listen(serverPort, function() {
-
         console.log('Listening to port: ' + serverPort);
-
     });
 
 /**
