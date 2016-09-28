@@ -37,9 +37,10 @@ function HTMLEntities(str) {
  * Initialize HTTP Server
  */
 var server = http.createServer();
-    server.listen(serverPort, function() {
-        console.log('Listening to port: ' + serverPort);
-    });
+
+server.listen(serverPort, function() {
+    console.log('Listening to port: ' + serverPort);
+});
 
 /**
  * Initialize webSocket server
